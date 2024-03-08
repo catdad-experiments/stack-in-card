@@ -86,9 +86,34 @@ class StackInCard extends LitElement implements LovelaceCard {
       return html``;
     }
 
+    const styles = [
+      '--ha-card-border-width: 0px'
+    ];
+
+    for (const [key, value] of Object.entries(this._config?.keep || {})) {
+      if (value === false) {
+        // TODO this should probably be implemented
+        // as much easier, no timeout way to remove
+        // all these values if they are controlled by
+        // lovelace style variables
+        switch (key) {
+          case 'background':
+            break;
+          case 'box_shadow':
+            break;
+          case 'margin':
+            break;
+          case 'outer_padding':
+            break;
+          case 'border_radius':
+            break;
+        }
+      }
+    }
+
     return html`
-      <ha-card header=${ifDefined(this._config.title)}>
-        <div>${this._card}</div>
+      <ha-card class="butts" header=${ifDefined(this._config.title)}>
+        <div style="${styles.join(';')}">${this._card}</div>
       </ha-card>
     `;
   }
